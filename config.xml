@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns   = "http://www.w3.org/ns/widgets"
+        xmlns:gap   = "http://phonegap.com/ns/1.0"
+        id          = "NCIS_Quiz.splodge97.edu.mit.scratch"
+        versionCode = "10" 
+        version     = "1.0.0" >
+    <name>NCIS_Quiz</name>
+    <description>
+Quiz with questions based on NCIS, Gibbs and Teams Rules.
+    </description>
+    <author href="http://scratch.mit.edu/users/splodge97" email="sophie.rose.cz@gmail.com">
+        splodge97
+    </author>
+        <icon src="icon.png"/>
+</widget>
