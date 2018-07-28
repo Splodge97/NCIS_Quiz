@@ -1,0 +1,60 @@
+<HTML>
+ <head>
+  <title> NCIS Quiz </title>
+ <style>
+     .font {font-size:25px; font-family:Palatino}
+ </style>
+ </head>
+<body>
+<div id=question class="font"> Are you ready? </div><br>
+<input id=box class="font"> <button id=confirm onclick="Go()" class="font">Confirm</button><br><br>
+<div id=extra class="font"> Say yes to start </div><p><br>
+<button id=restart style="color:DimGrey" onclick="Restart()"></button>
+<script>
+var score=0;
+var Questions = ["Finish Rule 11, When the job is done, ...","What is DiNozzo Rule 1?","According to Abbys Rule 7, what should be trusted?",
+"According to Abbys Rule 8, what should be trusted?", "Which Rule is Never go anywhere without a knife?", "According to Rule 14, you shouldn't break the line, what should you do?",
+"According to Rule 4, what is the best way to keep a secret?", "According to Rule 4, what is the second way to keep a secret?","Who's Rule 4 is Knives don't run out of bullets?",
+"According to Rule 35, who should you always watch?","According to McGees Rule 10, what should be avoided?","What is McGees Rule 1?",
+"According to Rule 6, why should you never apologize?", "According to Rule 18, its easier to seek what?","Who's Rule 12 is Be happy?","What is Abbys Rule 1?","What is Rule 7?",
+"According to Rule 22, when should you never ever bother Gibbs?","Who's Rule 16 is  Don't drink the boss' coffee-ever?","When are the 40's used for?",
+"Who's Rule 4 is Always speak the truth?","Finish Rule 40, If it seems like someone is out to get you, …","According to Zivas Rule 3, why should you drive fast?", 
+"Which Rule is There is no such thing as coincidence?","According to DiNozzos Rule 4, what should always be seeked out?", "What is Rule 38?","What is Zivas Rule 1?", "What is Rule 51?"]; 
+var Answers = ["Walk away","Never sit on the sidelines when your people need you", "The evidence","Gibbs and the team", "9", "Bend it", "Keep it to yourself",
+"Tell one other person if you must","Ziva","the watchers","Heights","When in doubt speak geek","It's a sign of weakness",
+"forgiveness","Abby","Never lie to Abby","Always be specific when you lie", "in interrogation","DiNozzo","Emergency Use Only","McGee", "they are",
+"avoid roadside bombs","39","A movie analogy","Your case your lead","If it annoys you kill it","Sometimes You're Wrong"];                                            
+                                                                                                //Questions & Answers
+var start = Math.floor(Math.random() * Questions.length);                                       //random start
+var which_one=start                                                                             //which one
+
+function Qo(){which_one=which_one+1;                                                            //increasing which one
+    if(which_one>=Questions.length){which_one=0; question.innerHTML=Questions[which_one]}       //if at end of questions start at begining
+    if(start==which_one)                                                                        //if back at start
+        {question.innerHTML="You scored "+score+" out of "+Questions.length;                    //  show score
+        if(score==Questions.length){extra.innerHTML="Well Done!"};                              //  if 100% say well done
+        setTimeout(function(){
+            question.innerHTML="Remember, A slap to the face is an insult";
+            extra.innerHTML="— to the back of the head is a wake-up call.";
+            restart.innerHTML="Restart";                                                        //  and create restart button
+        },5000);}                                                                               //  after 5secs show quote
+    else {question.innerHTML = Questions[which_one] }}                                          //if not ask questions
+    
+function Go(){
+if(box.value==""){extra.innerHTML="Answer the question"}
+else if(box.value.toUpperCase()=="YES" || box.value.toUpperCase()=="Y")                         //if start (say yes)
+    {extra.innerHTML = ""; document.getElementById('box').value = '';                           //  clear extra & input
+    question.innerHTML = Questions[start]}                                                      //  ask 1st question
+else if(Answers[which_one].toUpperCase()==box.value.toUpperCase())                              //if answer correct
+    {score=score+1; extra.innerHTML = "Correct";                                                //  increase score & say correct
+    setTimeout(function(){extra.innerHTML=""; document.getElementById('box').value = ''; Qo()},2000)}   //clear extra & input & Qo after 2 secs
+else {extra.innerHTML = Answers[which_one]; setTimeout(function(){extra.innerHTML="";
+    document.getElementById('box').value = ''; Qo()},2000)} }                                   //if not show answer, then clear extras & input Qo after 2 secs
+
+function Restart(){var score=0; var start = Math.floor(Math.random() * Questions.length);
+    var which_one=start;                                                                        //reset variables
+    document.getElementById('box').value = ''; question.innerHTML="Are you ready?";
+    extra.innerHTML = "Say yes to start"; restart.innerHTML=""}                                  //reset phrases
+</script>
+</body>
+</html> 
