@@ -23,11 +23,9 @@ var Questions = ["Finish Rule 11, When the job is done, ...","What is DiNozzo Ru
 var Answers = ["Walk away","Never sit on the sidelines when your people need you", "The evidence","Gibbs and the team", "9", "Bend it", "Keep it to yourself",
 "Tell one other person if you must","Ziva","the watchers","Heights","When in doubt speak geek","It's a sign of weakness",
 "forgiveness","Abby","Never lie to Abby","Always be specific when you lie", "in interrogation","DiNozzo","Emergency Use Only","McGee", "they are",
-"avoid roadside bombs","39","A movie analogy","Your case your lead","If it annoys you kill it","Sometimes You're Wrong"];                                            
-                                                                                                //Questions & Answers
+"avoid roadside bombs","39","A movie analogy","Your case your lead","If it annoys you kill it","Sometimes You're Wrong"];
 var start = Math.floor(Math.random() * Questions.length);                                       //random start
 var which_one=start                                                                             //which one
-
 function Qo(){which_one=which_one+1;                                                            //increasing which one
     if(which_one>=Questions.length){which_one=0; question.innerHTML=Questions[which_one]}       //if at end of questions start at begining
     if(start==which_one)                                                                        //if back at start
@@ -39,7 +37,6 @@ function Qo(){which_one=which_one+1;                                            
             restart.innerHTML="Restart";                                                        //  and create restart button
         },5000);}                                                                               //  after 5secs show quote
     else {question.innerHTML = Questions[which_one] }}                                          //if not ask questions
-    
 function Go(){
 if(box.value==""){extra.innerHTML="Answer the question"}
 else if(box.value.toUpperCase()=="YES" || box.value.toUpperCase()=="Y")                         //if start (say yes)
@@ -50,7 +47,6 @@ else if(Answers[which_one].toUpperCase()==box.value.toUpperCase())              
     setTimeout(function(){extra.innerHTML=""; document.getElementById('box').value = ''; Qo()},2000)}   //clear extra & input & Qo after 2 secs
 else {extra.innerHTML = Answers[which_one]; setTimeout(function(){extra.innerHTML="";
     document.getElementById('box').value = ''; Qo()},2000)} }                                   //if not show answer, then clear extras & input Qo after 2 secs
-
 function Restart(){var score=0; var start = Math.floor(Math.random() * Questions.length);
     var which_one=start;                                                                        //reset variables
     document.getElementById('box').value = ''; question.innerHTML="Are you ready?";
