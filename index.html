@@ -2,14 +2,16 @@
  <head>
   <title> NCIS Quiz </title>
  <style>
-     .font {font-size:25px; font-family:Palatino}
+     body {background-color: #264d73}
+     .font {font-size:25px; font-family:Palatino; color:#ffffff; background-color:#264d73;}
  </style>
  </head>
 <body>
+<img src="ncis.jpg" width=350px>
 <div id=question class="font"> Are you ready? </div><br>
 <input id=box class="font"> <button id=confirm onclick="Go()" class="font">Confirm</button><br><br>
 <div id=extra class="font"> Say yes to start </div><p><br>
-<button id=restart style="color:DimGrey" onclick="Restart()"></button>
+<button id=restart style="color:DimGrey" onclick="Restart()">Restart</button>
 <script>
 var score=0;
 var Questions = ["Finish Rule 11, When the job is done, ...","What is DiNozzo Rule 1?","According to Abbys Rule 7, what should be trusted?",
@@ -19,38 +21,57 @@ var Questions = ["Finish Rule 11, When the job is done, ...","What is DiNozzo Ru
 "According to Rule 6, why should you never apologize?", "According to Rule 18, its easier to seek what?","Who's Rule 12 is Be happy?","What is Abbys Rule 1?","What is Rule 7?",
 "According to Rule 22, when should you never ever bother Gibbs?","Who's Rule 16 is  Don't drink the boss' coffee-ever?","When are the 40's used for?",
 "Who's Rule 4 is Always speak the truth?","Finish Rule 40, If it seems like someone is out to get you, …","According to Zivas Rule 3, why should you drive fast?", 
-"Which Rule is There is no such thing as coincidence?","According to DiNozzos Rule 4, what should always be seeked out?", "What is Rule 38?","What is Zivas Rule 1?", "What is Rule 51?"]; 
+"Which Rule is There is no such thing as coincidence?","According to DiNozzos Rule 4, what should always be seeked out?", "What is Rule 38?","What is Zivas Rule 1?"]; 
 var Answers = ["Walk away","Never sit on the sidelines when your people need you", "The evidence","Gibbs and the team", "9", "Bend it", "Keep it to yourself",
-"Tell one other person if you must","Ziva","the watchers","Heights","When in doubt speak geek","It's a sign of weakness",
-"forgiveness","Abby","Never lie to Abby","Always be specific when you lie", "in interrogation","DiNozzo","Emergency Use Only","McGee", "they are",
-"avoid roadside bombs","39","A movie analogy","Your case your lead","If it annoys you kill it","Sometimes You're Wrong"];
+"Tell one other person if you must","Ziva David","the watchers","Heights","When in doubt speak geek","It's a sign of weakness",
+"forgiveness","Abby Sciuto","Never lie to Abby","Always be specific when you lie", "in interrogation","Tony DiNozzo","Emergency Use Only","Tim McGee", "they are",
+"avoid roadside bombs","39","A movie analogy","Your case your lead","If it annoys you kill it"];
+var Answers2 = ["Walk away","Never sit on the sidelines when people need you", "evidence","the team and Gibbs", "nine", "Bend", "Tell no one",
+"Tell one other person","Ziva","watchers","Heights","if in doubt speak geek","Its a sign of weakness",
+"forgiveness","Abby","Never lie to Abby","Always be specific when you lie", "interrogation","Tony","Emergency Use","Tim", "they're",
+"avoid bombs","thirty nine","movie analogy","Your case your lead","when it annoys you kill it"];
+var Answers3 = ["Walk away.","Never sit on the sidelines when your people need your help", "The evidence","Gibbs & the team", "9", "Bend it.", "Keep it to yourself",
+"Tell one person","David","the watchers","Heights","When in doubt speak geek","sign of weakness",
+"forgiveness","Sciuto","Never lie to Abby","Always be specific when you lie", "in interrogation","DiNozzo","Emergency","McGee", "they are.",
+"to avoid bombs","39","A film analogy","Your case, your lead","If it annoys you kill it"];
+                                                                                                //Questions & Answers
 var start = Math.floor(Math.random() * Questions.length);                                       //random start
-var which_one=start                                                                             //which one
-function Qo(){which_one=which_one+1;                                                            //increasing which one
+var which_one=start;                                                                             //which one
+var lastone=0;
+
+function Qo(){
+ if(lastone==0){
+    which_one=which_one+1;                                                                      //increasing which one
     if(which_one>=Questions.length){which_one=0; question.innerHTML=Questions[which_one]}       //if at end of questions start at begining
     if(start==which_one)                                                                        //if back at start
-        {question.innerHTML="You scored "+score+" out of "+Questions.length;                    //  show score
+        {lastone=1; question.innerHTML="What is Rule 51?"}
+    else {question.innerHTML = Questions[which_one] }}                                          //if not ask questions
+ else if (lastone==1){question.innerHTML="You scored "+score+" out of "+Questions.length;                    //  show score
         if(score==Questions.length){extra.innerHTML="Well Done!"};                              //  if 100% say well done
         setTimeout(function(){
             question.innerHTML="Remember, A slap to the face is an insult";
             extra.innerHTML="— to the back of the head is a wake-up call.";
-            restart.innerHTML="Restart";                                                        //  and create restart button
-        },5000);}                                                                               //  after 5secs show quote
-    else {question.innerHTML = Questions[which_one] }}                                          //if not ask questions
+        },5000);}}                                                                               //  after 5secs show quote
+
 function Go(){
-if(box.value==""){extra.innerHTML="Answer the question"}
-else if(box.value.toUpperCase()=="YES" || box.value.toUpperCase()=="Y")                         //if start (say yes)
-    {extra.innerHTML = ""; document.getElementById('box').value = '';                           //  clear extra & input
-    question.innerHTML = Questions[start]}                                                      //  ask 1st question
-else if(Answers[which_one].toUpperCase()==box.value.toUpperCase())                              //if answer correct
-    {score=score+1; extra.innerHTML = "Correct";                                                //  increase score & say correct
-    setTimeout(function(){extra.innerHTML=""; document.getElementById('box').value = ''; Qo()},2000)}   //clear extra & input & Qo after 2 secs
-else {extra.innerHTML = Answers[which_one]; setTimeout(function(){extra.innerHTML="";
-    document.getElementById('box').value = ''; Qo()},2000)} }                                   //if not show answer, then clear extras & input Qo after 2 secs
-function Restart(){var score=0; var start = Math.floor(Math.random() * Questions.length);
-    var which_one=start;                                                                        //reset variables
-    document.getElementById('box').value = ''; question.innerHTML="Are you ready?";
-    extra.innerHTML = "Say yes to start"; restart.innerHTML=""}                                  //reset phrases
+ if(lastone==0){
+    if(box.value==""){extra.innerHTML="You need to enter your answer in the box"}
+    else if(box.value.toUpperCase()=="YES" || box.value.toUpperCase()=="Y")                         //if start (say yes)
+        {extra.innerHTML = ""; document.getElementById('box').value = '';                           //  clear extra & input
+        question.innerHTML = Questions[start]}                                                      //  ask 1st question
+    else if(Answers[which_one].toUpperCase()==box.value.toUpperCase()||Answers2[which_one].toUpperCase()==box.value.toUpperCase()||Answers3[which_one].toUpperCase()==box.value.toUpperCase())
+                                                                                                //if answer correct
+        {score=score+1; extra.innerHTML = "Correct";                                                //  increase score & say correct
+        setTimeout(function(){extra.innerHTML=""; document.getElementById('box').value = ''; Qo()},2000)}   //clear extra & input & Qo after 2 secs
+    else {extra.innerHTML = Answers[which_one]; setTimeout(function(){extra.innerHTML="";
+        document.getElementById('box').value = ''; Qo()},2000)} }                                   //if not show answer, then clear extras & input Qo after 2 secs
+ else if(lastone==1){if("SOMETIMES YOU'RE WRONG"==box.value.toUpperCase()||"SOMETIMES YOUR WRONG"==box.value.toUpperCase()||"SOMETIMES - YOU'RE WRONG"==box.value.toUpperCase())
+    {score=score+1; extra.innerHTML = "Correct";                                                
+        setTimeout(function(){extra.innerHTML=""; document.getElementById('box').value = ''; Qo()},2000)}   
+    else {extra.innerHTML = "Sometimes - You're Wrong"; setTimeout(function(){extra.innerHTML="";
+        document.getElementById('box').value = ''; Qo()},2000)} } }         
+ 
+function Restart(){location.reload()}
 </script>
 </body>
 </html> 
